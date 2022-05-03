@@ -1,0 +1,15 @@
+{
+  "name": "pj-todayhouse",
+  "version": "1.0.0",
+  "description": "### 실습 1. 해당 프로젝트 폴더 기준, 터미널에서 `npm init -y` 명령어 실행.",
+  "main": "index.js",
+  "scripts": {
+    "db" : "json-server --watch ./db.json --port 1234"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.17.0"
+  }
+}
