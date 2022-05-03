@@ -1,0 +1,8 @@
+바로 이전 강의를 보셨다면 구조가 쉽게 이해되실 것 같습니다.
+레이아웃을 상, 하단으로 나누어 놓은 것도 바로 이전 수업과 같죠?
+
+-
+css 전처리기 sass, scss 공식 사이트 
+https://sass-lang.com/guide
+scss 정리가 잘 되어 있어서 링크 넣었는데, 문제시 삭제 하겠습니다.
+https://medium.com/@jinminkim_50502/css-preprocessor-sass-scss-25dc8329f867

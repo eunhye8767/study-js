@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    img { 
+      width: 100%;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+    .imgbox {
+      width: 768px;
+      height: 858px;
+      margin: auto;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .imgbox img {
+      will-change: transform;
+      animation: image-move 4s steps(4) infinite;
+    }
+    @keyframes image-move {
+        to {
+          transform: translateX(-400%);
+        }
+    }
+  </style>
+</head>
+<body>
+  <section class="imgbox">
+    <img src="./test/img1.png" alt="">
+    <img src="./test/img4.png" alt="">
+    <img src="./test/img2.png" alt="">
+    <img src="./test/img3.png" alt="">
+  </section>
+</body>
+</html>

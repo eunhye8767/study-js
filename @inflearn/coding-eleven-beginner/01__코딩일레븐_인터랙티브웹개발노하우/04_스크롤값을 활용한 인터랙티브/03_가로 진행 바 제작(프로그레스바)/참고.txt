@@ -1,0 +1,4 @@
+화면 width 길이의 스크롤 바 구현. 백분율 구하는 공식.
+
+가로 퍼센트값 = 스크롤탑 값 / (문서 전체 길이 - 윈도우 창 길이 ) * 100;
+per = (scrollTop / (document.documentElement.scrollHeight - window.innerHeight) )* 100;

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      position: relative;
+      background-color: black;
+    }
+    h1 {
+      color: #fff;
+    }
+    .cursor_item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+  <script>
+    let cursor_item;
+    let h1;
+
+    // 마우스의 x, y값을 변수로 뺀다.
+    let x = 0;
+    let y = 0;
+
+    let mx = 0;
+    let my = 0;
+    let speed = 0.05;
+
+    window.onload = function() {
+      // TagName. ClassName =>> 배열로 넘어오기 때문에 첫번째 요소인 [0]을 선택해줍니다.
+      h1 = document.getElementsByTagName('h1')[0];
+      cursor_item = document.getElementsByClassName('cursor_item')[0];
+
+      window.addEventListener('mousemove', mouseFunc, false);
+      function mouseFunc(e) {
+        // 마우스 좌표 clientX clientY 
+        x = e.clientX;
+        y = e.clientY;
+        
+        // console.log(e.clientX, e.clientY);
+      }
+      loop();
+    }
+    // let i = 0
+    // 모션 컨텐츠를 만들 때 자주 사용하게 되는 requestAnimationFrame
+    function loop() {
+      // console.log(x, y);
+      // console.log(i += 1);
+
+      /*
+      mx += ( x - mx ) * speed;
+      움직일 값 += (현재 마우스 위치 - 바로 전 위치 값) * 0.001;
+      현재 위치가 100, 마우스 현재 위치가 150이라고 치면! 100부터 50만큼 이동을 하면 되는데.
+      한 번에 50을 더해주면 바로 착! 이동을 하니까 조금씩 작은 수를 더해주는 겁니다.
+      100 += (150 - 100) * 0.001; 이렇게  계산 된 수를 계속 더해주는 방식.
+      101
+      102
+      108
+      115
+      ...
+      150
+     */
+      mx += (x - mx) * speed;
+      my += (y - my) * speed;
+      // console.log(x, mx);
+      h1.innerHTML = `X: ${x} / MX: ${mx}`
+      window.requestAnimationFrame(loop);
+      cursor_item.style.transform = `translate(${mx}px, ${my}px)`
+    };
+    
+  </script>
+</head>
+<body>
+  <h1>test</h1>
+  <div class="cursor_item"></div>
+</body>
+</html>

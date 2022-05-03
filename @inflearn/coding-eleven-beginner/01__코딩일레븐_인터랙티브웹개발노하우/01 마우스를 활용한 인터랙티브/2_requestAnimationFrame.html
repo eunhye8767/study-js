@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      position: relative;
+      background-color: black;
+    }
+    h1 {
+      color: #fff;
+    }
+    .cursor_item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+  <script>
+    // window.onload => 화면이 로드가 다 된 후에 실행하라
+    window.onload = function() {
+      // TagName. ClassName =>> 배열로 넘어오기 때문에 첫번째 요소인 [0]을 선택해줍니다.
+      let h1 = document.getElementsByTagName('h1')[0];
+      // let h1 = document.getElementById('h1');
+      let cursor_item = document.getElementsByClassName('cursor_item')[0];
+
+      window.addEventListener('mousemove', mouseFunc, false);
+      function mouseFunc(e) {
+        // 마우스 좌표 clientX clientY 
+        h1.innerHTML = `X: ${e.clientX} / Y: ${e.clientY}`
+        // console.log(e.clientX, e.clientY);
+        cursor_item.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      }
+
+      // loop();
+    }
+    let i = 0
+    // 모션 컨텐츠를 만들 때 자주 사용하게 되는 requestAnimationFrame
+    function loop() {
+      // console.log(i += 1);
+      window.requestAnimationFrame(loop);
+    };
+    
+  </script>
+</head>
+<body>
+  <h1 id="h1">test</h1>
+  <div class="cursor_item"></div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      height: 10000px;
+      background: linear-gradient(150deg, red, orange, yellow, green, indigo, purple, black);
+    }
+    h1 {
+      color: #fff;
+
+    }
+    .progress {
+      width: 100%;
+      height: 5px;
+      background: black;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .bar {
+      width: 0%;
+      height: 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: yellow;
+    }
+  </style>
+  <script>
+    // 세로 스크롤를 얼만큼 내렸고 얼만큼 남았는 지
+    // 가로스크롤바에 프로그레스바로 표기
+
+    let scrollTop = 0;
+    let bar;
+
+    window.onload = function() {
+      bar = document.getElementsByClassName('bar')[0]
+    }
+
+    window.addEventListener('scroll', function(e){
+      scrollTop = document.documentElement.scrollTop;
+      // console.log("스크롤값 : "+ scrollTop);
+      
+      // 현재 위치 값이 세로 총 길이에서 몇 프로정도에 있는 지 확인하는 연산
+      // 소숫점까지 나오므로 Math.ceil 로 올림을 적용
+      // 실제 화면사이즈를 빼줘야 스크롤을 끝까지 내려갔을 때 가로스크롤바가 꽉 차는 것을 볼 수 있다 (window.outerHeight)
+      // ceil 올림 , floor 내림 , round 반올림
+      let per = Math.ceil(scrollTop / (document.body.scrollHeight - window.outerHeight) * 100)
+      console.log(per);
+
+      bar.style.width = per + "%";
+
+    }, false)
+  </script>
+</head>
+<body>
+  <h1>스크롤</h1>
+  <div class="progress">
+    <span class="bar"></span>
+  </div>
+</body>
+</html>
