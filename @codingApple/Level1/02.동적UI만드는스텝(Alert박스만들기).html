@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동적UI만드는스텝(Alert박스만들기)</title>
+
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  
+  <div id="alert" class="alert-box">
+    <p id="title">알림창임</p>
+    <button onclick="handleAlert('none')">닫기</button>
+  </div>
+
+  <button onclick="handleAlert('block', '아이디를 입력하세요')">버튼1</button>
+  <button onclick="handleAlert('block', '비밀번호를 입력하세요')">버튼2</button>
+
+  <script>
+    function handleAlert(toggle, title) {
+      document.getElementById('alert').style.display = toggle;
+      document.getElementById('title').innerHTML = title;
+    }
+
+    // function handleAlertOpen() {
+    //   document.getElementById('alert').style.display = 'block'
+    // }
+    // function handleAlertClose() {
+    //   document.getElementById('alert').style.display='none'
+    // }
+  </script>
+
+</body>
+</html>
