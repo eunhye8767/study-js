@@ -5,3 +5,10 @@
   color: white;
   border-radius: 5px;
 }
+
+.list-group {
+  display: none;
+}
+.list-group.show {
+  display: block;
+}
