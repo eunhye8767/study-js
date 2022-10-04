@@ -4,15 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>동적UI만드는스텝(Alert박스만들기)</title>
-
-  <link rel="stylesheet" href="./main.css">
+  <title>자바스크립트 이벤트리스너</title>
 </head>
 <body>
-  
   <div id="alert" class="alert-box">
     <p class="title">알림창임</p>
-    <button onclick="handleAlert('none')">닫기</button>
+    <button id="close">닫기</button>
   </div>
 
   <button onclick="handleAlert('block', '아이디를 입력하세요')">버튼1</button>
@@ -24,18 +21,9 @@
       document.getElementsByClassName('title')[0].innerHTML = title;
     }
 
-    // function handleAlert(toggle, title) {
-    //   document.getElementById('alert').style.display = toggle;
-    //   document.getElementById('title').innerHTML = title;
-    // }
-
-    // function handleAlertOpen() {
-    //   document.getElementById('alert').style.display = 'block'
-    // }
-    // function handleAlertClose() {
-    //   document.getElementById('alert').style.display='none'
-    // }
+    document.getElementById("close").addEventListener("click", function () {
+      document.getElementById("alert").style.display = 'none';
+    })
   </script>
-
 </body>
 </html>
