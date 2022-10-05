@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>if else 문법</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <form action="success.html">
+    <div class="my-3">
+      <input type="text" class="form-control">
+     </div>
+     <div class="my-3">
+       <input type="password" class="form-control">
+     </div>
+     <button type="submit" class="btn btn-primary">전송</button>
+     <button type="button" class="btn btn-danger" id="close">닫기</button>
+  </form> 
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+      if (document.querySelector("input[type='text']").value === '') {
+        e.preventDefault();
+        alert("아이디를 입력해주세요");
+      } else if (document.querySelector("input[type='password']").value === '') {
+        e.preventDefault();
+        alert("비밀번호를 입력해주세요");
+      } else if (document.querySelector("input[type='password']").value.length < 6) {
+        e.preventDefault();
+        alert("비밀번호를 6자리 이상 입력해주세요");
+      }
+    })
+
+    document.querySelector("input[type='text']").addEventListener("input", function (e) {
+      console.log('input', e.target.value);
+    })
+    
+    // 포커스를 읽을 때 발생하는 이벤트
+    // input과 change 이벤트가 같은 듯 다름.
+    document.querySelector("input[type='text']").addEventListener("change", function (e) {
+      console.log('change', e.target.value);
+    })
+  </script>
+</body>
+</html>
