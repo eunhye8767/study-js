@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>변수문법과 Dark mode 버튼만들기</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <div>
+    <span class="badge bg-dark">Dark 🔄</span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let count = 0;
+
+    document.querySelector(".badge").addEventListener("click", function () {
+      count += 1;
+
+      if (count % 2 === 0) {
+        this.innerHTML = 'Dart 🔄'
+      } else {
+        this.innerHTML = 'Light 🔄'
+      }
+    })
+  </script>
+</body>
+</html>
