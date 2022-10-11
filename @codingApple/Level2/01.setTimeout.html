@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>setTimeout 타이머주는 법</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  
+  <div class="main-bg">
+    <h4>Shirts on Sale</h4>
+    <button id="login" class="btn btn-danger">로그인</button>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="txt">5</span>초 이내 구매 시 사은품 증정!
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // setTimeout(fncTimeOut, 5000);
+
+    // function fncTimeOut() {
+    //   document.querySelector(".alert").style.display = 'none';
+    // }
+
+    // setInterval(function() {
+    //   console.log('안녕');
+    // }, 1000)
+    const txt = document.querySelector(".alert > .txt");
+    let num = 5;
+
+    function fncSetInterval() {
+      if (num >= 1) {
+        num -= 1;
+        txt.innerHTML=num;
+      }
+    }
+
+    setInterval(fncSetInterval, 1000);
+
+  </script>
+
+</body>
+</html>
