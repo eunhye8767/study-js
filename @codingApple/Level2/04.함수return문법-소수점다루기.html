@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>함수의 return 문법 & 소수점 다루기</title>
+</head>
+<body>
+  <script>
+
+    /*
+     * 프로그래밍에서의 함수도 마찬가지로 
+       자료를 집어넣으면 규칙에 따라 다른 자료가 나오는 변환기 역할을 할 수 있습니다.
+       변환기 만들 때 return 문법이 유용하게 사용됩니다.
+     */
+    function fncTest() {
+      return 123;
+    }
+
+    console.log(fncTest());
+
+    function vat(n) {
+      return n * 0.1;
+    }
+
+    console.log(vat(4000));
+
+    /*
+     * 소수점 있는 숫자 연산지 주의점
+     * ㄴ 소수점 반올림 => var num = (a * 1.1).toFixed(2);  
+     * ㄴ 둘째자리까지 반올림. (괄호)에 숫자를 넣어주면 됨.
+     * ㄴ toFixed 경우, 반올림하면서 문자열로 변환해준다.
+     * ㄴ 숫자로 변환할 땐 parseFloat(num)
+     */ 
+
+    function fncMs(a, b) {
+      // const m = a * 60 * 1000;
+      // const s = b * 1000;
+      // return m +s;
+
+      var result = (a * 60 + b) * 1000;
+      return result;
+    }
+
+    console.log(fncMs(1, 30));
+    console.log(fncMs(2, 10));
+
+    function fncSale(n, b) {
+      let price = n - (n * 0.1);
+      
+      if (b) {
+        price = price - 1.5;
+        return parseFloat(price.toFixed(1));
+      } else {
+        return price;
+      }
+    }
+
+    console.log(fncSale(70, false));
+    console.log(fncSale(10, true));
+
+  </script>
+</body>
+</html>
