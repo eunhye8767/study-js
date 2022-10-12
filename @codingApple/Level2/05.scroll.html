@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스크롤 이벤트로 만드는 재밌는 기능들</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./main.css">
+
+  <style>
+    :root {
+      /* 부트스트랩 적용했을 때, 스크롤 원상복귀 */
+      scroll-behavior: auto;
+    }
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 5;
+    }
+    .navbar-brand {
+      font-size: 30px;
+    }
+    .navbar-brand.is-scroll {
+      font-size: 10px;
+    }
+
+    .agr-box {
+      position: relative;
+      top: 100px;
+      width: 300px;
+      height: 200px;
+      overflow-y: scroll;
+      border: 4px solid black;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand">Navbar</span>
+      <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="agr-box">
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione deleniti, velit quibusdam sapiente nisi facilis voluptas commodi asperiores, animi est placeat illum consequuntur adipisci id molestias eaque? Consectetur, placeat ea!
+    Quam a id iste quibusdam obcaecati sit porro quis sapiente delectus dolore voluptates ex ea eos quia explicabo voluptas recusandae velit iure labore vero rem quidem, qui perspiciatis repudiandae! Beatae.
+    Quos quidem molestiae dignissimos non possimus quia, praesentium quod sit laboriosam quaerat nostrum. Recusandae libero distinctio, asperiores ad maxime iste voluptates harum cupiditate dignissimos eos temporibus provident, deserunt tempora dolore?
+    Consequuntur illum nostrum aliquid ullam in consequatur ipsam, nihil nulla quos ea soluta, placeat esse ut repudiandae voluptatem dicta asperiores sed eum, suscipit distinctio cupiditate voluptates? Iure sequi voluptatem ab!
+    Magnam perferendis odit, vel modi ut libero doloribus a ullam maxime tempora. Cum omnis nostrum cupiditate, expedita ea reprehenderit, consequatur tempora, esse a porro minima sunt perspiciatis earum corrupti ad.
+  </div>
+
+  <div style="height: 1000px;">
+    <br>
+    <br>
+    <br>
+    <br>
+    ddd
+    <Br>
+    <Br>
+    <Br>
+    <Br>
+    <Br>
+    <Br>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener("scroll", function () {
+      const { scrollY, scrollTo, scrollBy } = window;
+      const brand = document.querySelector(".navbar-brand");
+      
+      // 강제 스크롤하기    scrollTo(0, 100);
+      // 현재 위치부터 강제 스크롤   scrollBy(0, 10);
+
+      if (scrollY >= 100) {
+        brand.classList.add("is-scroll");
+      } else {
+        brand.classList.remove("is-scroll");
+      }
+    })
+
+    const agrbox = document.querySelector(".agr-box");
+    agrbox.addEventListener("scroll", function () {
+      const { scrollTop, scrollHeight, clientHeight } = this
+
+      // console.log(scrollTop, scrollHeight, clientHeight,  scrollHeight - clientHeight);
+      if (scrollTop >= scrollHeight - clientHeight - 10) {
+        alert("다 읽었어요");
+      }
+    })
+
+
+    /*
+     * 현재 html 페이지
+     *  ㄴ  document.documentElement
+     *  ㄴ  document.querySelector("html")
+     */
+
+  </script>
+</body>
+</html>
