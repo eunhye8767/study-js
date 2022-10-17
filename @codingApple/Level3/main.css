@@ -12,3 +12,7 @@
 .list-group.show {
   display: block;
 }
+
+.form-hide {
+  display: none;
+}

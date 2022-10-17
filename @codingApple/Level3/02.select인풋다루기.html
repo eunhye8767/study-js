@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select 인풋 다루기</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <form class="container my-5 form-group">
+      <p>상품선택</p>
+      <select class="form-select mt-2">
+        <!-- <option hidden="" disabled="disabled" selected="selected" value="">=====선택하세요=====</option> -->
+        <option>모자</option>
+        <option>셔츠</option>
+        <option>바지</option>
+      </select>
+      <select class="form-select mt-2 form-hide">
+        <option>95</option>
+        <option>100</option>
+      </select>
+    </form>
+
+    <script>
+      const select = document.querySelector("select");
+      
+      // select.addEventListener('change', (e) => {
+      select.addEventListener('input', (e) => {
+        const value = e.target.value;
+        const select2 = document.querySelectorAll(".form-select")[1];
+
+        const size = {
+          shirt : `
+            <option>90</option>
+            <option>95</option>
+            <option>100</option>
+          `,
+          pants : `
+            <option>28</option>
+            <option>29</option>
+            <option>30</option>
+          `
+        }
+        
+        if (value === "셔츠") {
+          select2.innerHTML = size.shirt;
+        } else if (value === "바지") {
+          select2.innerHTML = size.pants;
+        }
+
+        (value === "셔츠" || value === "바지")
+          ? select2.classList.remove('form-hide')
+          : select2.classList.add('form-hide')
+      });
+    </script>
+  </body>
+</html>
