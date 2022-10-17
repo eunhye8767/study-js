@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <div class="container mt-3">
+    <div class="card p-3">
+      <span>상품명</span>
+      <span>가격</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var car2 = { name : '소나타', price : '50,000' }
+
+    const elemCard = document.querySelector(".card");
+
+    elemCard.querySelectorAll("span")[0].innerHTML = `${car2.name}`
+    elemCard.querySelectorAll("span")[1].innerHTML = `${car2.price}`
+  </script>
+</body>
+</html>
