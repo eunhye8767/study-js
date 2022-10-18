@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 로드 후 실행
+    document.addEventListener('DOMContentLoaded', function() { 
+      // 실행할 코드
+      document.getElementById('test').innerHTML = '안녕'
+    })
+
+    셀렉터로찾은이미지.addEventListener('load', function(){
+      //이미지 로드되면 실행할 코드 
+    })
+
+    window.addEventListener('load', function(){
+      //document 안의 이미지, js 파일 포함 전부 로드가 되었을 경우 실행할 코드
+    })
+  </script>
+  
+  <p id="test">임시글자</p>
+</body>
+</html>
