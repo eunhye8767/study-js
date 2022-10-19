@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+<body>
+  <div class="card-background">
+    <div class="card-box">
+      <img src="./card1.png">
+    </div>
+    <div class="card-box">
+      <img src="./card2.png">
+    </div>
+    <div class="card-box">
+      <img src="./card3.png">
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script>
+    $(window).scroll(function(){
+      var 높이 = $(window).scrollTop();
+      // var y = 미지의 변수;
+      // y = a * 높이 + b
+      // 높이가 650일 때 y가 1, 높이가 1150일 때 y가 0입니다. 
+      // 1 = a * 650 + b   
+      // 0 = a * 1150 + b
+      // a = -1/500  b = 115/50
+      var y = -1/500 * 높이 + 115/50
+      $('.card-box').eq(0).css('opacity', y);
+
+      var z = (-1/5000) * 높이 + 565/500;
+      $('.card-box').eq(0).css('transform', `scale( ${z} )`);
+    });
+  </script>
+</body>
+</html>
