@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // const data = JSON.parse(localStorage.getItem('cart'));
+    const data = JSON.parse(localStorage.cart);
+
+    data.forEach(item => {
+      console.log(item);
+      // console.log(item.tit, item.price);
+    });
+
+    
+  </script>
+  
+</body>
+</html>
