@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코드 3줄로 캐러셀 (이미지 슬라이드) 만들기</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./main.css" />
+
+    <style>
+      .slide-container {
+        width: 300vw;
+        transition: all 1s;
+      }
+      .slide-box {
+        width: 100vw;
+        height: 300px;
+        float: left;
+      }
+      .slide-box:nth-child(1) {
+        background: red;
+      }
+      .slide-box:nth-child(2) {
+        background: yellow;
+      }
+      .slide-box:nth-child(3) {
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box"></div>
+        <div class="slide-box"></div>
+        <div class="slide-box"></div>
+      </div>
+    </div>
+    
+    <button class="prev">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const container = document.querySelector(".slide-container");
+      let currSlide = 0;
+
+      document.querySelector(".slide-1").addEventListener("click", function () {
+        currSlide = 0;
+        container.style.transform = 'translateX(0)';
+      })
+      document.querySelector(".slide-2").addEventListener("click", function () {
+        currSlide = 1;
+        container.style.transform = 'translateX(-100vw)';
+      })
+      document.querySelector(".slide-3").addEventListener("click", function () {
+        currSlide = 2;
+        container.style.transform = 'translateX(-200vw)';
+      })
+
+      function handleSlide(dir) {
+        if (dir === "prev") {
+          if (currSlide > 0 && currSlide <= 2) {
+            currSlide -= 1;
+            container.style.transform = `translateX(-${currSlide}00vw)`;
+          }
+        } else if (dir === "next") {
+          if (currSlide >= 0 && currSlide < 2) {
+            currSlide += 1;
+            container.style.transform = `translateX(-${currSlide}00vw)`;
+          }
+        }
+      }
+
+      document.querySelector(".prev").addEventListener("click", function () {
+        handleSlide("prev");
+      })
+      
+      document.querySelector(".next").addEventListener("click", function() {
+        handleSlide("next");
+      })
+
+      /*
+       *  1. 내가 드래그한 거리만큼 사진도 왼쪽으로 움직임.
+       *  2. 손 놓으면 다음 그림으로 이동 (ex. 약 100px이상)
+       *  
+       *  # mousedown, mouseup, mousemove
+       *  # e.clientX => 현재 마우스위치 x좌표
+       * 
+       *  드래그 했을 때 이미지 드래그 막기
+       *   ㄴ <img draggable="false" />
+       * 
+       *  # 모바일의 경우, 이벤트를 touch로 변경해줘야 한다.
+       *     ㄴ mousedown => touchstart
+       *     ㄴ mouseup   => touchend
+       *     ㄴ mousemove => touchmove
+       *     ㄴ e.clientX => e.touches[0].clientX;
+       *     ㄴ touchend 에서는 e.changedTouches[0].clientX
+       * 
+       *  # Hammer.js 라이브러리 추천
+       *    1. 브라우저 호환성을 잡아준다.
+       *    2. 이벤트리스너 여러개가 아닌 1개만 필요하다.
+       *    3. 스와이프, pinch, rotate 이벤트리스너도 제공한다.
+       */
+
+      let startX = 0, downClicked = false, value = 0;
+      document.querySelectorAll(".slide-box")[0].addEventListener("mousedown", function (e) {
+        startX = e.clientX;
+        downClicked = true;
+      })
+      document.querySelectorAll(".slide-box")[0].addEventListener("mousemove", function (e) {
+        // 왼쪽 -> 오른쪽 : 양수
+        // 오른쪽 -> 왼쪽 : 음수
+        value = e.clientX - startX;
+
+        if (downClicked) container.style.transform = `translateX(${value}px)`;
+        // console.log(e.clientX - startX);
+      })
+      document.querySelectorAll(".slide-box")[0].addEventListener("mouseup", function (e) {
+        downClicked = false;
+
+        console.log(value);
+        if (value < -100) {
+          container.style.transform = 'translateX(-100vw)';
+        } else {
+          container.style.transform = 'translateX(0)';
+        }
+      });
+
+    </script>
+  </body>
+</html>
