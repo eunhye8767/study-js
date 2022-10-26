@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow function은 function을 대체하는 신문법이 아님</title>
+</head>
+<body>
+  <script>
+    /*
+     *  # 함수를 사용하는 이용
+     *    1. 코드들을 기능으로 묶고 싶을 때
+     *    2. [ 입출력 기계 ] 를 만들고 싶을 때
+     */
+
+    // 입출력 기계를 만들 때 보기 쉬움.
+    const 함수1 = (a) => { return a + 10 }
+
+    // 소괄호를 생략할 수 있다. (파라미터가 하나 밖에 없을 때)
+    const 함수2 = a => { return a + 10 }
+    
+    // 코드 한 줄이면 중괄호도 생략이 가능
+    const 함수3 = a => a + 10
+
+    함수();
+
+    // 예시
+    [1,2,3,4].forEach(a => console.log(a))
+
+    elem.addEventListener("click", (e) => {
+      // console.log(this); window를 가리키기 떄문에
+      // elem 이벤트 대상을 가리키고자 할 땐
+      console.log(e.currentTarget);
+    })
+
+    
+  </script>
+</body>
+</html>

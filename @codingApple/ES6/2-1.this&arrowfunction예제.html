@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <button id="버튼">버튼이에요</button>
+
+  <script>
+    var 사람 = {
+      name: '손흥민',
+      sayHi() {
+        console.log(`안녕, 나는 ${this.name}`);
+      }
+    }
+    사람.sayHi();
+
+    var 자료 = {
+      data: [1,2,3,4,5],
+      total () {
+        let total = 0;
+        this.data.forEach(d => total = total + d)
+        console.log(total);
+      }
+    }
+    자료.total();
+  </script>
+
+  <script>
+    document.querySelector("#버튼").addEventListener("click", (e) => {
+      const $this = e.currentTarget;
+
+      setTimeout(() => {
+        console.log($this.innerHTML);  
+      }, 1000);
+    });
+  </script>
+  
+</body>
+</html>
