@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>변수 신문법 총정리</title>
+</head>
+<body>
+  
+  <script>
+    /*
+     *  # 변수
+     *    1. var   => 재선언, 재할당, 범위 : function
+     *    2. let   => 재선언 불가, 재할당, 범위 : {}
+     *    3. const => 재선언 불가, 재할당 불가, 범위 : {} 
+     *         ㄴ  단, 오브젝트 경우 가능
+     *                const obj = { name: 'kim'}
+     *                obj.name = 'lee' 처럼 변경이 가능하다.
+     * 
+     *         ㄴ 오브젝트도 수정불가능하게 만들고 싶다면?
+     *            => Object.freeze(obj)
+     */
+
+    /*
+     *  # 변수의 Hoisting 현상 (자바스크립트 특징)
+     *      - 변수, 함수의 선언을 변수 범위 맨위로 끌고 오는 현상.
+     *      - 변수, 함수를 만나면 선언 부분을 강제로 맨위로 끌어올림.
+     * 
+     *  # 전역 변수
+     *      - 모든 곳에서 쓸 수 있는 변수.
+     *      - window.이름 = 'kim' 처럼 전역 변수로 만들 수 있다.
+     *        console.log(window.이름)
+     */ 
+  </script>
+
+</body>
+</html>
