@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  # 함수의 default 파라미터 넣기
+     *     ㄴ함수를 만들 때 파라미터값을 실수로 안적거나 했을 경우 
+     *       파라미터에 기본값(default 값)을 줄 수 있습니다. 
+     *       이렇게 사용하시면 됩니다. 
+    */
+
+    function 더하기 (a, b = 10){
+      console.log(a + b)
+    }
+
+    더하기(1); // 11
+
+    function 더하기2 (a, b = 2 * a){
+      console.log(a + b)
+    }
+
+    더하기2(3);  // 9
+
+
+    function 임시함수(){
+      return 10 
+    }
+
+    function 더하기3 (a, b = 임시함수() ){
+      console.log(a + b)
+    }
+
+    더하기3(3);  // 13
+  </script>
+
+  <script>
+    /**
+     *  # 함수의 arguments
+     *      ㄴ 함수의 모든 파라미터들을 전부 한꺼번에 싸잡아서 다루고 싶은 경우가 있습니다. 
+     *         그럴 땐 arguments라는 키워드를 활용하시면 됩니다. 
+     *         함수 안에서 쓸 수 있는 미리 정의된 키워드 혹은 변수인데
+     *         한번 써보도록 합시다. 
+    */
+    
+    function 함수(a,b,c){
+      console.log(arguments)
+    }
+
+    함수(2,3,4);  //  [2,3,4]
+
+    // 콘솔창에 모든 파라미터를 하나씩 출력해주고 싶은 경우
+    function 함수(a,b,c){
+      for (var i = 0; i < arguments.length; i++){
+        console.log(arguments[i])
+      }
+    }
+
+    함수(2,3,4);
+  </script>
+</body>
+</html>
