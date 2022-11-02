@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  # constructor, prototype 연습문제
+    */
+
+    function Student(name, age) {
+      this.name = name;
+      this.age = age;
+      this.sayHi = function () {
+        console.log(`안녕 나는 ${this.name}이야`);
+      }
+    }
+
+    let student1 = new Student('Kim', 20);
+    let student2 = new Student('Park', 21);
+    let student3 = new Student('Lee', 22);
+
+    student1.sayHi();
+    student2.sayHi();
+    student3.sayHi();
+  </script>
+
+  <script>
+    /**
+     *  # 1. 다음 코드의 출력 결과는 무엇일까요?
+     * 
+     *       ㄴ 답안 : kim
+     *          'Kim' 입니다.
+     *          첫 4줄에 의해서 a = { name : 'Kim' } 이 되고 
+     *          a.__proto__.name = 'Park'; 
+     *          이건 부모 prototype에 { name : 'Park' } 이걸 추가하라는 뜻입니다.
+     *          그럼 이제 a.name 이라고 사용했을 때 
+     *          내가 직접 가지고 있는 { name : 'Kim' } 이걸 우선 출력해줍니다.
+    */
+
+    function Parent(){
+      this.name = 'Kim';
+    }
+    var a = new Parent();
+
+    a.__proto__.name = 'Park';
+    console.log(a.name)
+  </script>
+
+  <script>
+    /**
+     *  # 2. 함수가 안들어가요 엉엉
+    */
+
+    function Student2(이름, 나이){
+      this.name = 이름;
+      this.age = 나이;
+    }
+
+    Student2.prototype.sayHi = () => {
+        console.log('안녕 나는 ' + this.name + '이야');
+      }
+    var 학생2 = new Student2('Kim', 20);
+
+    학생2.sayHi();
+
+    /**
+     *  # 답안
+     * 
+     *  sayHi() 라는 함수를 prototype에 추가할 때 arrow function을 사용했습니다 .
+     * 결론부터 말하자면 arrow function은 그냥 일반 function 대체품이아닙니다.
+     * arrow function은 this를 바깥에 있는 this를 그대로 사용하고 싶을 때 쓰는 함수라고 했었습니다. 
+     * 암튼 그런데 sayHi() 함수를 만들 때 arrow function을 사용해서
+     * 내부에 있던 this라는 값이 이상해진 것이었습니다. 
+     * 
+     * Student.prototype.sayHi = () => { console.log(this); }
+     * sayHi 함수에 그냥 this 하나만 출력해보시면 window 같은게 출력될 것입니다. (strict mode에선 undefined)
+     * 이전 강의내용에 따르면 arrow function을 사용하시면 그냥 바깥 아무데나 있던 값을 가져와서 사용합니다.
+     * 바깥 this 값은 window이며,
+     * 그 window를 그대로 저기 함수 안에다가 적용했기 때문입니다. 
+     * 그래서 this가 이상해서 그랬던 문제였습니다. 
+     * 
+     * this 잠깐 복습하자면 
+     * 함수안에서 this 키워드의 뜻은 매번 재정의됩니다. 
+     * object안에 들어있는 함수안에 있는 this는 함수를 부른 object가 된다고 했습니다.
+     * 하지만 arrow function의 경우 함수 안에서 this 뜻이 재정의되지 않고 바깥에 있던 this를 사용합니다. 
+     * 
+     * var 오브젝트 = { sayHi : () => { console.log(this) } }
+     * 오브젝트.sayHi();
+     * 
+     * ▲ 그래서 위 코드의 this는
+     * 오브젝트 그런게 아니라 window가 출력됩니다.
+     * 문제에 나온 예제도 이거랑 같은 식입니다.
+    */
+  </script>
+
+  <script>
+    /**
+     *  # 모든 array에 적용할 수 있는 함수를 직접 새로 만들려면 어떻게 해야할까요?
+     * 
+     * 모든 array에 붙일 수 있는,
+     * array 내에 있는 3이라는 값을 제거해주는 유용한 함수를 하나 만들고 싶습니다. 
+     * 
+     * ★★★
+     * 실은 find나 filter나 비슷한 내장함수가 있긴 합니다만 
+     * 내가 자주 사용할법한 내장함수들을 많이 만들어두시면 더 효율적인 코딩생활이 가능합니다. 
+     * 혹은 이런 함수들 모아서 나중에 자바스크립트 라이브러리화 해서 사용해도 괜찮을 것 같습니다. 
+     * ★★★
+    */
+
+    Array.prototype.remove3 = function(){
+      // this 에서 3을 찾아서 제거해주세요
+
+      for (var i = 0; i < this.length; i++) {
+        if ( this[i] === 3 ) {
+          this.splice(i,1);
+        }
+      }
+    }
+
+    var arr = [1,2,3,4,4,4,5,3,4];
+    arr.remove3();
+    console.log(arr); //[1,2]
+  </script>
+</body>
+</html>
