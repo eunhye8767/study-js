@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    /**
+     *  # constructor
+     *    1. 문법의 용도
+     *        ㄴ object를 마구마구 복사하고 싶을 때 사용한다.
+     *        ㄴ 비슷한 object를 여러 개 만들 때!
+     * 
+     *    2. 생성자 함수는 대문자로 시작한다. ex. function Test() {}
+     *    3. 생성자 함수(ex. 기계)에서 this는 새로 생성되는 object를 뜻함.
+     *         => this : 기계에서 새로 생성되는 object instance (인스턴스)
+     *         => 기계 : object 생성 기계 == constructor, 생성자
+    */
+    
+    function 기계(이름, 나이){
+      this.name = 이름;
+      this.age = 나이;
+      this.sayHi = function(){
+        console.log(`안녕하세요, ${this.name} 이며, 나이는 ${this.age}살 입니다.`);
+      }
+    }
+    var 학생1 = new 기계('Park', 10);
+    var 학생2 = new 기계('Kim', 20);
+
+    학생1.sayHi();
+    학생2.sayHi();
+  </script>
+
+  <script>
+    /**
+     *  # 간단 연습문제 : 쇼핑몰에 쓸 상품데이터를 오브젝트로 여러개 만들고 싶습니다. 
+     *    
+     *    var product1 = { name : 'shirts', price : 50000 };
+     *    var product2 = { name : 'pants', price : 60000 };
+    */
+    
+    function Prod(name, price) {
+      this.name = name;
+      this.price = price;
+      this.prod = function () {
+        console.log(`상품 : ${this.name}, 가격 : ${this.price}원 입니다.`);
+      };
+      this.vat = function () {
+        console.log(`부가세 : ${this.price * 0.1 }`);
+      }
+    }
+
+    let prod1 = new Prod('shirts', 50000);
+    let prod2 = new Prod('pants', 60000);
+
+    prod1.prod();
+    prod2.prod();
+    
+    
+    /**
+     *  # Q2. 상품마다 부가세() 라는 내부 함수를 실행하면 콘솔창에 상품가격 * 10% 만큼의 부가세금액이 출력되도록 하고 싶으면
+     */
+    prod1.vat();
+    prod2.vat();
+  </script>
+
+</body>
+</html>
