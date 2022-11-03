@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>class를 복사하는 extends / super</title>
+</head>
+<body>
+  <script>
+    /**
+     *  # class를 상속한 class를 만들고 싶을 때 쓰는 extends
+     * 
+     *      ㄴ 할아버지 class를 하나 만들었다고 칩시다. 
+     *         할아버지 class는 성과 이름이라는 속성을 가지고 있습니다. 
+    */
+
+    class 할아버지{
+      constructor(name){
+        this.성 = 'Kim';
+        this.이름 = name;
+      }
+    }
+
+    /**
+     *         그럼 이제 new 할아버지() 뭐 이런식으로 하면 
+     *         새로운 object를 쉽게 생성할 수 있겠죠?
+     *         그런데 이 class가 너무나도 유용한 나머지 이것과 
+     *         유사한 class를 하나 더 만들고 싶습니다. 
+     *         그러면 직접 class를 하나 더 만들어서 내용을 복붙하면 되겠죠?
+     *         하지만 class안에 복사할 내용이 너무나도 많으면 코드가 너무나도 길어집니다. 
+     *         그래서 고대의 개발자들이 " extends "라는 문법을 만들었는데
+     * 
+     *         이걸 이용해서 class를 만드시면 
+     *         기존에 있던 class의 내용을 그대로 복붙해서 만들어낼 수 잇습니다. 
+     * 
+     *         있어보이게 말하면 
+     *         "다른 class를 상속해서 만들 수 있게 도와주는 문법"이죠.
+     * 
+     *         extends는 이렇게 쓰면 됩니다. 
+     *         그럼 이제 할아버지라는 class를 그대로 복붙한 아버지라는 class가 생성됩니다. 
+     *         진짜 class가 생겼는지 확인해보고 싶으면 new 아버지(); 
+     *         이렇게 테스트 해보면 되겠죠?
+     * 
+     *         new 아버지('만수'); 
+     *         이렇게 하시면 성과 이름을 가진 object 자료가 하나 생성됩니다.
+     * 
+     *         할아버지랑 똑같은 class가 생겼죠? 
+     *         extends 문법 끝!
+    */
+
+    class 할아버지{
+      constructor(name){
+        this.성 = 'Kim';
+        this.이름 = name;
+      }
+    }
+
+    class 아버지 extends 할아버지{
+
+    }
+
+    /**
+     *  # 근데 아버지라는 class에는 새로운 속성을 추가하고 싶으면 
+     *     ㄴ 당연히 아버지 constructor안에 내용을 추가하시면 됩니다. 
+     * 
+     *     ㄴ 이렇게 하면 new 아버지() 했을 때 
+     *        생성된 오브젝트들은 {성, 이름, 나이} 속성들을 가지겠군요. 
+     *        하지만 이러면 에러가 납니다.
+     *        super를 써야된다고 에러가 나네요. 
+     *        그럼 super를 써주시면 됩니다
+     * 
+     *     ★★★★★
+     *     super()라는 이상한 함수는
+     *     "extends로 상속중인 부모 class의 constructor()"를 의미합니다. (암기사항)
+     *     쉽게 말하면 할아버지 class의 constructor() 이거랑 똑같다는 소리입니다. (암기해야됨)
+     *     그래야 이제 에러없이 this.나이 이런걸 추가하실 수 있습니다. (암기 ㄱ)
+     *     ★★★★★
+     * 
+     *      ㄴ 할아버지 class의 constructor()에는 name 파라미터를 입력할 수 있었죠?
+     *         그것도 똑같이 따라서 명시해주셔야 
+     *         할아버지가 가진 모든 속성들을 정확히 상속받을 수 있습니다. 
+    */
+
+    class 할아버지{
+      constructor(name){
+        this.성 = 'Kim';
+        this.이름 = name;
+      }
+    }
+
+    class 아버지 extends 할아버지{
+      constructor(name){
+        super(name);
+        this.나이 = 50;
+      }
+    }
+
+    var a = new 아버지('지율자영');
+  </script>
+
+  <script>
+    /**
+     *  # 할아버지에 메소드(함수)를 추가한다면
+     *     ㄴ 할아버지 class 안에 함수를 추가한다면 
+     *        아버지 class의 자식들도 물려받아 쓸 수 있을까요?
+     * 
+     *     ㄴ 그럼 이제 a라는 오브젝트는 sayHi()라는 함수를 쓸 수 있을까요?
+     *        - 쓸 수 있습니다. 
+     *        
+     *     ㄴ a라는 오브젝트가 a.sayHi() 이렇게 사용한다면
+     *          1. a라는 오브젝트에 sayHi가 있는지 물어보고
+     *          2. 없으면 아버지.prototype에 sayHi가 있는지 물어보고 
+     *          3. 없으면 할아버지.prototype에 sayHi가 있는지 물어보고 
+     *        이런 식으로 sayHi를 실행하기 위해 부모님을 뒤져봅니다. 
+     *        근데 sayHi()라는건 할아버지.prototype에 추가된 함수이기 때문에 
+     *        a라는 오브젝트는 sayHi() 함수를 실행할 수 있습니다. 
+    */
+
+    class 할아버지{
+      constructor(name){
+        this.성 = 'Kim';
+        this.이름 = name;
+      }
+      sayHi(){
+        console.log('안녕 나는 할아버지')
+      }
+    }
+
+    class 아버지 extends 할아버지{
+      constructor(name){
+        super(name);
+        this.나이 = 50;
+      }
+    }
+
+    var a = new 아버지('만수');
+
+    /**
+     *  # 근데 class간에 함수를 상속하고 싶으면 어떻게 해요?
+     * 
+     *    ㄴ 아버지라는 class에 함수를 만들고 싶습니다. 
+     *       근데 할아버지 class에 있던 sayHi()라는 함수가 너무나도 유용한 나머지
+     *       이걸 그대로 아버지 class에 가져와서 활용하고 싶은 것입니다. 
+     * 
+     *    ㄴ 이 때도 super를 쓰시면 됩니다.
+     * 
+     *    ㄴ super라는걸 저렇게 prototype 함수 안에서 쓰시면 
+     *       아까의 super와 약간 다른 의미가 됩니다.
+     *       여기서의 super는 부모 class의 prototype을 의미합니다. 
+     *       알겠쥬? 
+     *       super는 뜻이 두개입니다.
+     *         1. constructor 안에서 쓰면 부모 class의 constructor
+     *         2. prototype 함수 안에서 쓰면 부모 class의 prototype
+    */
+
+    class 할아버지{
+      constructor(name){
+        this.성 = 'Kim';
+        this.이름 = name;
+      }
+      sayHi(){
+        console.log('안녕 나는 할아버지')
+      }
+    }
+
+    class 아버지 extends 할아버지{
+      constructor(name){
+        super(name);    // 부모 class의 constructor를 의미 
+        this.나이 = 50;
+      }
+      sayHi2(){
+        console.log('안녕 나는 아버지');
+        super.sayHi();  // 부모 class의 prototype을 의미
+      }
+    }
+
+    var a = new 아버지('만수');
+
+    /**
+     *  # Q. 그럼 위의 예제 코드에서 a.sayHi2()를 실행하면 무엇이 콘솔창에 출력될까요?
+     * 
+     *        ㄴ 답변
+     *           a.sayHi2()를 사용하신다면 
+     *           아버지.prototype에 있던 sayHi2 함수가 동작합니다. 
+     *           그 함수는 일단 console.log('안녕 나는 아버지')를 실행하고
+     *           둘째 줄에서 super.sayHi()를 실행합니다. 
+     *           이건 다른말로 할아버지.prototype.sayHi()와 똑같기 때문에
+     *           console.log('안녕 나는 할아버지')를 실행할 것입니다. 
+     *           그래서 콘솔창에 "안녕 나는 아버지" "안녕 나는 할아버지"가 출력됩니다.
+    */
+  </script>
+</body>
+</html>

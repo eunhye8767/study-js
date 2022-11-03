@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>class</title>
+</head>
+<body>
+  <script>
+    /**
+     *  # ES6 class 키워드로 구현하는 constructor 기계만들기
+     * 
+     *    constructor 라는건 저번시간에 했기 때문에 다들 아시죠? 
+     *    오브젝트 뽑는 기계였습니다. 
+     *    ES6 class라는 신문법으로 constructor를 만드시려면 이렇게 따라치시면 됩니다. 
+     * 
+     *    예전 function 부모(){} 어쩌구 이렇게 기계를 만드는 문법과 똑같은 문법입니다. 
+     *    이제 new 키워드를 이용해서 방금 만든 부모라는 기계에서 오브젝트를 새로 생성할 수 있는 것이고요.
+     *    constructor()라고 쓴 부분에 예전처럼 this.name 어쩌구 하시면 새로 생성되는 오브젝트들에 값을 부여할 수 있습니다. 
+    */
+
+    class 부모 {
+      constructor(){
+        this.name = 'Kim'
+      }
+    }
+
+    var 자식 = new 부모();
+  </script>
+
+  <script>
+    /**
+     *  # 상속가능한 함수를 추가하려면 어떻게 해야할까요?
+     *  
+     *  1. 함수를 this.sayHi 이렇게 constructor 안에 추가하는 방법과
+     *  2. 기계의 prototype에 추가하는 방법이 있었죠?  
+     * 
+    */
+
+    // ▼ 1번은 똑같이 이렇게 하시면 되겠죠?
+    class 부모 {
+      constructor(){
+        this.name = 'Kim';
+        this.sayHi = function(){ console.log('hello') }
+      }
+    }
+
+    var 자식 = new 부모();
+
+    // ▼ 2번처럼 prototype에 추가하시려면 
+          // 이런 식으로 하시면 됩니다. 
+          // 오브젝트에 함수추가하듯 하시면 됩니다요. 
+          // 그럼 자식은 sayHi()라고 썼을 때 부모의 prototype에 있던 sayHi() 함수를 쓸 수 있습니다.
+          // (혹은 그냥 부모.prototype.sayHi = function(){} 이렇게 하셔도 되고요)
+    class 부모 {
+      constructor(){
+        this.name = 'Kim';
+      }
+
+      // 유지보수를 위해 constructor 보단 아래와 같은 방식(부모 프로토타입)으로 진행하는 것을 권장.
+      sayHi(){ 
+        console.log('hello') 
+      }
+    }
+
+    var 자식 = new 부모();
+
+    /**
+     *  # 참고로 알아두는 Object.getPrototypeOf();
+     * 
+     *    이 함수 안에 오브젝트를 넣으시면 부모 prototype을 출력해줍니다. 
+     *    이 오브젝트가 대체 누구로부터 prototype을 상속받고 있는지를 알려주는 함수죠. 
+     *    __proto__라는 키워드와 비슷한 역할을 한다고 보시면 됩니다. 
+     *    __protp__ 대신 Object.getPrototypeOf() 을 권장.
+    */
+    console.log(자식.__proto__, Object.getPrototypeOf(자식))
+  </script>
+
+  <script>
+    /**
+     *  # constructor안에 파라미터 추가하기
+     *     ㄴ ES6 방식으로 constructor 만들 때 파라미터를 추가하려면 아래와 같이 하면 된다.
+     * 
+    */
+
+    class 부모 {
+      constructor(이름, 나이){
+        this.name = 이름;
+        this.age = 나이;
+      }
+    }
+
+    var 자식 = new 부모('Park', 30);
+
+    /**
+     *  # prototype 내에 함수 여러개 추가하기
+     *     ㄴ prototype에 sayHi, sayHello 등 여러개 함수를 동시에 넣을 수 있다.
+    */
+
+    class 부모 {
+      constructor(이름, 나이){
+        this.name = 이름;
+        this.age = 나이;
+      }
+      sayHi(){
+        console.log('안녕');
+      }
+      sayHello(){
+        console.log('안녕하세요');
+      }
+    }
+
+    var 자식 = new 부모('Park');
+  </script>
+</body>
+</html>
