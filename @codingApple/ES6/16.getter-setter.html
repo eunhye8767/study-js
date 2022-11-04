@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  # 함수로 object 데이터를 꺼내는 방법 
+     * 
+     *  사람.nextAge() 이렇게 사용하면 내년 나이가 출력되겠죠? 31이라고 출력되겠네요. 
+     *  이렇게 데이터를 끄집어내서 사용하는 방법이 요즘 유행입니다. 
+     * 
+     *  굳이 왜 이렇게 하냐면 
+     *    - object 안의 데이터가 복잡할 수록 함수 만들어놓는게 데이터 꺼내기 쉽습니다.
+     *    - 내부에 있는 name, age 변수를 건드리지 않아서 실수를 방지할 수 있어서 안전합니다.
+     *      특히 매우 긴 object 안에 원하는 자료 몇개만 뽑고 싶을 때
+     *      미리 저렇게 함수를 만들어놓으면 매번 기능개발해줄 필요가 없습니다. 
+     *   
+     *  (참고)
+     *  다른 언어에선 코드가 class 단위로 동작하는데 
+     *  class 안에 가끔 외부로 부터 보호하고 싶은 변수들이 있습니다.   
+     *  그럴 때 저런 함수를 많이 만들어 사용합니다. 
+     *  그런 코딩스타일을 자바스크립트에 그대로 적용하고 있다고 보면 됩니다.
+     *  (보호라는 뜻은 그냥 실수로 수정하는거 방지입니다)
+    */
+
+    var 사람 = {
+      name : 'Kim',
+      age : 30,
+      nextAge(){
+        return this.age + 1
+      }
+    }
+
+    /**
+     *  # 함수로 object 데이터를 수정하는 방법 
+     * 
+     *    이번엔 object에 있는 age 데이터를 수정하고 싶습니다. 
+     *    40으로 변경하고 싶습니다. 어떻게 할까요?   
+     *    사람.age = 40 이렇게 등호를 이용하면 수정되긴하죠?
+     *    하지만 미래를 생각하는 개발자들은 데이터 수정을 위한 함수를 만들어 사용합니다. 
+     * 
+     *    setAge()라는 함수를 오브젝트 내에 추가했습니다.
+     *    그리고 이 함수는 파라미터를 한개 입력할 수 있는데 그 파라미터를 그대로 this.age에 집어넣어주는 역할을 합니다. 
+     *    그럼 이제 사람.setAge(40) 이렇게 쓰시면 자유롭게 나이 변경이 가능합니다.     
+     *    사람.age = 40 이렇게 쉽게 안하고
+     *    사람.setAge(40) 굳이 이렇게 하는 이유는 
+     *      - 내부에 있는 name, age 변수를 직접 건드리지 않아서 실수를 방지할 수 있습니다.
+     *    한 겹의 안전장치를 만든다고 보면 됩니다.
+    */
+
+    /**
+     *  # 함수를 만들어 object 데이터를 다루는 이유
+     * 
+     *    1. object 자료가 복잡할 때 용이
+     *    2. object 자료 수정 시 편리 (실수 시 한 번 더 체크할 수 있음.)  == setAge
+    */
+
+    var 사람 = {
+      name : 'Kim',
+      age : 30,
+      setAge(나이){
+        // parseInt() = 문자열을 숫자로 변환
+        this.age = parseInt(나이)
+      }
+    }
+
+    사람.setAge('200'); //문자 넣었는데도 숫자 200으로 저장됨
+  </script>
+
+  <script>
+    /**
+     *  # 함수 쓰기 복잡하다면 get/set 키워드를 붙이자
+     * 
+     *    1. setAge() 함수 만들 때 왼쪽에 set이라는 키워드를 추가하시면 
+     *       이제 등호로 데이터를 입력하거나 하실 수 있습니다. 
+     *       보기도 쉽고 직관적이고 그렇죠? 
+     *       그래서 set을 사용합니다. 
+     *       그리고 set 붙은 함수들은 setter라고 부릅니다. (데이터를 set 하는 (수정하는) 함수라는 뜻)
+     * 
+     *    2. nextAge()라는 함수를 만들 때는 get 키워드를 사용가능합니다. 
+     *       그러면 이제 소괄호 없이 nextAge를 사용해서 데이터를 꺼낼 수 있습니다. 
+     *       보기도 쉽고 직관적이고 그렇죠? 
+     *       그래서 get을 사용합니다. 
+     *       그리고 get 붙은 함수들은 getter라고 부릅니다. (데이터를 get하는 (가져오는) 함수라는 뜻)
+     * 
+     *  # get/set 사용하는 기준
+     *    ㄴ 그냥 데이터를 뽑아주는, 가져와주는, get 해주는 함수들은 get 쓰시면 되고
+     *       데이터를 입력해주는, 수정해주는, set 해주는 함수들은 set 쓰시면 됩니다. 
+     *       그리고 규칙도 있습니다.      
+     *       
+     *       set 함수는 데이터를 입력해서 수정해주는 함수니까 파라미터가 한개 꼭 존재해야하고
+     *       get 함수는 파라미터가 있으면 안되고 함수 내에 return을 가져야합니다.
+     * 
+     *       잘못 쓰면 에러를 알려주니까 외울 건 없고
+     *       보통 그냥 get 느낌나는 함수들은 get 붙이면 별일 없으니 그닥 어렵진 않습니다.  
+    */
+
+    // 1. setter : 입력, 수정
+    var 사람 = {
+      name : 'Kim',
+      age : 30,
+      set setAge(나이){
+        this.age = parseInt(나이)
+      }
+    }
+
+    사람.setAge = 40; //set 키워드를 추가하면 이렇게 함수를 사용가능
+
+    // 2. getter : 꺼내 쓰기
+    var 사람 = {
+      name : 'Kim',
+      age : 30,
+      get nextAge(){
+        return  this.age + 1  
+      }
+    }
+
+    console.log( 사람.nextAge ) //get 키워드를 추가하면 이렇게 함수를 사용가능
+  </script>
+
+  <script>
+    /**
+     *  # class에서 사용하는 get/set
+     *     ㄴ class 안에서 함수 만들 때 get/set 키워드를 이용해서 getter/setter 식으로 함수를 만들 수 있습니다
+    */
+
+    class 사람 {
+      constructor(){
+        this.name = 'Park';
+        this.age = 20;
+      }
+      get nextAge(){
+        return this.age + 1
+      }
+      set setAge(나이){
+        this.age = 나이;
+      }
+    }
+
+    var 사람1 = new 사람();
+
+    // class 안의 함수들을 getter/setter로 만들어 쓰고 싶으면 이렇게 하시면 됩니다. 
+    // 이제 새로 뽑인 object인 사람1은 
+
+    사람1.nextAge;
+    사람1.setAge = 50;
+  </script>
+</body>
+</html>
