@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symbol 자료형은 쓸모없어보이는데 왜 있는거죠</title>
+</head>
+<body>
+  <!-- 
+    # Symbol 자료형 만드는 법 
+       ㄴ 간단하게 만들 수 있습니다. 
+
+    Symbol() 함수를 이용하시면 되고 안에 아무 설명이나 적으시면 됩니다. 
+    심볼만들기 끝!
+    그냥 주석(설명)하나만 달랑 저장할 수 있는 자료형입니다.
+    근데 어디다가 사용하는지 알아야 코딩할 때 쓰죠 문법만 배워서 뭐함 
+   -->
+  <script>
+    var 심볼 = Symbol('설명아무거나적기');
+  </script>
+
+  <!-- 
+    # Symbol은 Object자료형에 비밀스런 key값을 부여하고싶을 때 씁니다. 
+
+    원래 Object 자료형에는 문자로만 key값을 입력할 수 있습니다. 
+    문자 아닌걸 입력해도 문자로 자동으로 치환되고요. 
+    근데 ES6부터는 Symbol도 key값으로 입력할 수 있습니다. 
+
+    person[심볼명] = 넣을자료;
+    이렇게 쓰시면 Object자료형에 Symbol을 이름으로 가진 자료를 저장가능합니다.
+   -->
+  <script>
+    /**
+     * 아래의 예제코드는 
+     * Symbol을 key값, 200을 value값으로 오브젝트에 집어넣은 예제입니다. 
+     * 출력해보면 { Symbol(내 진짜 몸무게) : 200 } 이라는 자료가 들어가있을겁니다.
+     * 이렇게 특이한 이름을 가진 자료를 Object안에 만들고 싶을 때 
+     * Symbol을 쓰시면 됩니다. 
+     * 
+     * 이 자료는 특징이 있는데, 
+     * for문에 등장하지 않는다는겁니다.
+     * 보통 Object를 반복문을 돌릴 때 for in 이런걸 사용합니다. 
+     * 그런데 Symbol은 반복문에서 감지하지 못합니다. 
+     * 
+     * 그래서 시크릿한 내용을 저장하고 싶을 때 
+     * Symbol을 이용해서 자료를 저장하시면 됩니다. 
+    */
+    var person = { name : 'Kim' };
+    person.weight = 100;
+
+    var weight = Symbol('내 진짜 몸무게');
+    person[weight] = 200;
+
+    console.log(person); // {name: 'kim', weight: 100, Symbol(내 진짜 몸무게): 200}
+  </script>
+
+  <!-- 
+    # 심볼을 직접 입력하려면 
+   -->
+  <script>
+    // Object 자료형에 직접 입력하실 때는 저렇게 대괄호안에 심볼명을 담아주시면 됩니다. 
+    var height = Symbol('내 키임');
+    var person = { name : 'Kim', [height] : 160 };
+  </script>
+
+  <!-- 
+    # import 해온 파일 / 라이브러리 쓸 때
+        ㄴ 거기 있던 object에 자료를 추가하고 싶다면
+        ㄴ 반복문에도 안 뜨니깐 기존 코드 해칠 염려가 없음.
+   -->
+
+
+  <!-- 
+    # Symbol 자료형 
+      특징1. 설명은 설명일 뿐
+
+    Symbol() 안에는 간단한 설명을 저장할 수 있다고 했습니다. 
+    근데 같은 설명을 가졌다고 해서 같은 Symbol이 아닙니다. 
+    각각 다른겁니다. 
+   -->
+  <script>
+    /**
+     * 위의 예제에서 a와 b 심볼은 설명이 같음에도 불구하고
+     * 두개를 같다고 비교해보면 false가 남습니다. 
+     * Symbol은 Symbol()이라고 사용할 때마다 각각 유니크한 Symbol이 생성되서 그렇습니다. 
+    */
+    var a = Symbol('설명1');
+    var b = Symbol('설명1');
+    console.log(a === b);
+  </script>
+
+  <!-- 
+    # Symbol 자료형 
+      특징2. Symbol.for()로 만드는 전역심볼
+
+    변수처럼 뭔가 같은값을 가지면 같은 변수로 취급해주는
+    전역 심볼을 만들어쓸 수 있습니다. 
+
+    그러고 싶으면 Symbol() 대신에 Symbol.for() 로 만드시면 됩니다. 
+   -->
+  <script>
+    /**
+     * 아래의 예제를 출력해보면 true라는 값이 남습니다. 
+     * 왜냐면 Symbol.for()로 새로운 Symbol을 만들 때
+     * 설명이 같으면 이미 그 설명을 가지고 있는 Symbol을 그 자리에 집어넣기 때문입니다. 
+     * 그래서 a와 b의 심볼은 각각 다른 곳에서 만들었음에도 불구하고 같은 Symbol이 됩니다
+    */
+    var a = Symbol.for('설명1');
+    var b = Symbol.for('설명1');
+    console.log(a === b);
+  </script>
+
+  <!-- 
+    # Symbol 자료형 
+      특징3. 기본 내장 Symbol들
+
+    Array, Object 자료형을 만들 때 몰래 붙어있는 기본 Symbol 들도 있습니다. 
+    예를 들면 모든 array 자료형은 [Symbol.iterator]라는 이름을 가진 심볼이 안에 있습니다.
+    궁금하면 아무 array나 만들고 한번 저걸 출력해보십시오. 
+    (Symbol을 출력하고 싶으면 오브젝트[심볼명] 이렇게 하시면 됩니다)
+   -->
+  <script>
+    var array = [2,3,4];
+
+    // [Symbol.iterator]  =>  array에 집어넣는 기본 Symbol
+    console.log(array[Symbol.iterator])
+  </script>
+
+
+
+  <!-- 
+    Q. 근데 우린 왜 몰랐죠?
+
+    심볼은 몰래 자료를 저장할 때 쓰는 자료형이랬잖아요. 
+    그래서 반복문 이런걸 써도 전혀 출력되지 않습니다. 
+    
+    참고로 Symbol.iterator라는 심볼은 for of를 쓸 수 있게 도와주는 Symbol입니다.
+    그래서 ES6환경에선 저런 식으로 뭔가 내장 기능을 만들어내는구나~라고 이해만 하시면 됩니다. 
+    원리를 파헤치기 시작하면 훌륭한 자바스크립트 대현자가 되지만
+    한국은 원리를 파헤치고 그런 기초과학하는 나라가 아닙니다. 
+    기술을 배워 먹고사는게 먼저입니다. 
+    그러니 여기까지 하겠습니다. 
+   -->
+</body>
+</html>
