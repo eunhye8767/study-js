@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typescript 필수문법 10분 정리와 설치 셋팅 (Vue, React 포함)</title>
+</head>
+<body>
+  <!-- 
+    # Typescript 필수문법 10분 정리와 설치 셋팅 (Vue, React 포함)
+
+    TypeScript = JavaScript + Type문법
+    "JavaScript Superset"
+   -->
+  <!-- 
+    타입스크립트를 써야 하는 이유
+
+    1. JavaScript는 Dynamic Typing 가능하다
+       원래는 숫자 - 숫자만 가능하지만
+       5 - "3" 처럼 JavaScript에서는 가능하다.
+       프로젝트가 커질 수록 자유도가 높은 건 위험요소가 높다는 뜻!!
+       => TS error : "문자랑 숫자 빼는 거 이상한데요 빨리 수정해주세요"
+
+    2. TypeScript는 에러메시지 퀄리티가 좋다. (정확하다)
+       js는 추상적인 에러메시지 출력인 반면에
+       ts는 코드 에디터 부가기능 역할로 봐도 될 듯하다.
+       (정확한 에러, 오타 등)
+   -->
+
+  <!-- 
+    # 타입스크립트 설치
+      (static 웹페이지 개발 시 가정)
+
+    1. nodejs 설치 (최신버전)
+    2. VScode 에디터 준비
+    3. 터미널 오픈
+       npm install -g typescript
+
+       ## <-- 
+       에러가 납니까
+
+        (1) nodejs 최신버전 설치를 안한 것임 삭제 후 최신 버전으로 재설치 합시다. 
+
+        (2) 윈도우인데 허가되지 않은 script 실행불가 어쩌구 에러가 뜨면 
+           시작 - 검색 - powershell - 우클릭해서 관리자 권한으로 실행한 다음
+           Set-ExecutionPolicy Unrestricted 입력하셈 그리고 y 선택하면 될듯 
+
+        (3) 맥북인데 보안에러 어쩌구가 뜨면
+            sudo npm install 어쩌구~ 이렇게 sudo를 앞에 붙여보십시오.
+            중간에 맥북 비번입력이 필요할 수 있습니다. 
+       <-- ## 
+    
+    4. 코드짤 작업폴더를 하나 만들어줍니다. 
+       코드짤 폴더 아무데나 만드셈 찾기좋은 바탕화면이 어떨까요.
+
+    5. 작업폴더를 에디터로 오픈합니다.
+       에디터에서 상단메뉴중에 File - Open Folder 누르고 
+       방금 만든 작업폴더 오픈하면 됩니다.
+       오픈안하면 큰일남 
+
+    6. 그 다음에 작업폴더에 .ts로 끝나는 파일 만들고 
+       타입스크립트 사용 시작하면 됩니다.
+       ts 파일은 js랑 똑같이 사용가능합니다.
+       다만 근데 웹브라우저는 ts 파일을 알아듣지 못하기 때문에
+       js 파일로 변환 작업을 해야합니다. 
+
+       ==>
+       만든 작업 폴더에
+       index.ts, tsconfig.json 파일을 생성.
+
+       tsconfig.json 파일 : ts -> js 컴파일 시 옵션 설정 가능
+       {
+         "compilerOptions" : {
+            "target": "es5",
+            "module": "commonjs"
+         }
+       }
+
+       <==
+
+    7. js 파일로 변환하려면 에디터에서 Terminal 새로 여신다음
+       tsc -w 입력해두면 얘가 자동으로 ts파일을 js 파일로 근처에 변환해줍니다.
+
+    8. 이제 HTML 파일 등에서 타입스크립트로 작성한 코드를 사용하려면 
+       당연히 .ts가 아니라 변환된 .js 파일을 사용하십시오. 
+
+       <script src="변환된파일.js"></script>
+   -->
+  
+  <!-- 
+    # React 프로젝트에서 Typescript 사용할 경우
+
+    1. 이미 있는 React 프로젝트에 설치하실거면
+       작업폴더경로에서 터미널을 오픈하신 후 
+
+       npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+
+       입력해주면 끝입니다. 이제 .js 파일을 .ts 파일로 바꿔서 이용가능합니다.
+       근데 뭔가 많아서 불안정하고 에러도 많이날 것 같죠?
+       그러면 yarn 1버전이 설치되어있으면 yarn add라는 명령어 쓰든가 
+       그냥 애초에 처음부터 Typescript 적용된 React 프로젝트를 생성할 수도 있습니다. 
+
+
+    2. 그냥 React 프로젝트를 새로 만들거면 
+       새로 작업폴더를 하나 만드시고 거기서 에디터와 터미널을 오픈한 다음 
+       npx create-react-app my-app --template typescript
+       입력해주면 끝입니다. 대시 두개임 
+   -->
+
+
+
+   <!-- 
+      # 간단한 변수 타입지정가능
+            ㄴ 변수를 만들 때 타입지정이 가능합니다. 
+               변수명 : 타입명 이렇게 씁니다.
+               타입으로 쓸 수 있는 것들은 
+               string, number, boolean, bigint, null, 
+               undefined,[], {} 등이 있습니다. 
+            
+            ㄴ let 이름 :string = 'kim';
+    -->
+</body>
+</html>
