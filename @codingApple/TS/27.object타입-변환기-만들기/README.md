@@ -13,6 +13,12 @@
 **keyof는 object 타입에 사용하면 object 타입이 가지고 있는 모든 key값을 union type으로 합쳐서 내보내줍니다.** <br />
 object의 key를 뽑아서 새로운 타입을 만들고 싶을 때 사용하는 연산자입니다. 
 
+<br />
+<br />
+
+**★ key값을 전부 가져오는 "keyof"**<br />
+**가끔 key값을 확인할 때 사용하게 된다**
+
 ```javascript
 interface Person {
   age: number;
@@ -145,6 +151,23 @@ color, model, price 속성은 전부 string 또는 number 타입이어야합니�
 - 풀이
 
 ```javascript
+type Bus = {
+  color : string,
+  model : boolean,
+  price : number
+}
+
+type TypeChanger2<OriType> = {
+  [key in keyof OriType] :string | number
+}
+
+type NewBus = TypeChanger2<Bus>;
+
+let objbus = {
+  color : 'blue',
+  model : 'ver2',
+  price : 13000
+}
 ```
 
 <br />
@@ -158,5 +181,25 @@ string, number 이렇게 고정된 타입으로 변환해주는게 아니라<br 
 내가 원하는 타입을 입력하면 그걸로 변환해주는 범용성 좋은 변환기를 만들어보십시오.
 
 ```javascript
-```
+type Bus = {
+  color : string,
+  model : boolean,
+  price : number
+}
 
+type TypeChanger <MyType, T> = {
+  [key in keyof MyType]: T;
+};
+
+type NewBus = TypeChanger<Bus, boolean>;
+type NewBus2 = TypeChanger<Bus, string[]>
+```
+이러면 TypeChanger 쓸 때마다 타입파라미터를 T 자리에 하나 더 입력할 수 있게 됩니다.<br />
+그러면 이제 오브젝트 모든 속성은 T로 바뀜<br />
+<br />
+ 
+NewBus 살펴보시면 모든 속성이 boolean으로 바뀌어있습니다.<br />
+NewBus2 살펴보시면 모든 속성이 string[] 으로 바뀌어있습니다.
+
+<br />
+<br />
