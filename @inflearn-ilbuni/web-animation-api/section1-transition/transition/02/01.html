@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .hand {
+        position: absolute;
+        left: 400px;
+        top: 90px;
+        width: 200px;
+      }
+
+      .key {
+        position: absolute;
+        left: 100px;
+        top: 50px;
+        width: 150px;
+        transition: 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="hand" src="./images/hand.svg" alt="" />
+    <!-- <img class="key" src="./images/key.svg" alt=""> -->
+
+    <!-- object 태그로 적용한 것은 script 적용이 된다. -->
+    <!-- 키 클릭 이벤트는 svg 자체에 스크립트로 적용한다. -->
+    <object class="key" data="./images/key.svg" type="image/svg+xml"></object>
+
+    <script>
+      const hand = document.querySelector(".hand");
+      const key = document.querySelector(".key");
+
+      let isKeyInHand = false;
+
+      hand.addEventListener("click", () => {
+        if (isKeyInHand) {
+          key.style.transform = "translate(0,0) scale(1)";
+        } else {
+          const handRect = hand.getBoundingClientRect();
+          const leftPosition = handRect.left - 130;
+          const topPosition = handRect.top - 75;
+
+          key.style.transform = `translate(${leftPosition}px, ${topPosition}px) scale(0.5)`;
+        }
+      });
+
+      key.addEventListener("transitionend", () => {
+        isKeyInHand = !isKeyInHand;
+      });
+    </script>
+  </body>
+</html>
