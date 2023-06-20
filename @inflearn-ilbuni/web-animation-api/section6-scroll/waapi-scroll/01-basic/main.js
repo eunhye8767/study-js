@@ -2,6 +2,7 @@ import "./scroll-timeline.js";
 
 const progress = document.querySelector(".progress");
 const scrollBox = document.querySelector(".scroll-box");
+const targetImages = document.querySelectorAll(".target-image");
 
 progress.animate(
   [
@@ -16,23 +17,12 @@ progress.animate(
     timeline: new ScrollTimeline({
       scrollOffsets: [
         {
-          // progress는 페이지의 처음부터 마지막까지에 영향을 받기 때문에 document.body
-          // target = 해당 애니메이션이 받는 영역
-          // target: document.body,
-
-          // target을 scroll-box로 하게 되면 브라우저 내 시작점에 왔을 때
-          target: scrollBox,
+          target: document.body,
           edge: "start",
-
-          // 1 = 0 지점으로 왔을 때 시작
-          // 0.5 = 반 이상 지나갔을 때 시작
           threshold: 1,
         },
         {
-          // target: document.body,
-
-          // target을 scroll-box로 하게 되면 브라우저 내 마지막점에 왔을 때
-          target: scrollBox,
+          target: document.body,
           edge: "end",
           threshold: 1,
         },
@@ -40,3 +30,21 @@ progress.animate(
     }),
   }
 );
+
+targetImages.forEach((image) => {
+  // image 좌표 수치를 이용해서 애니메이션 적용
+  const imageTop = image.offsetTop;
+  const imageHeight = image.offsetHeight;
+
+  const offset1 = imageTop + imageHeight - window.innerHeight;
+  const offset2 = imageTop - 200;
+
+  image.animate([{ opacity: 0 }, { opacity: 1 }], {
+    timeline: new ScrollTimeline({
+      scrollOffsets: [
+        new CSSUnitValue(offset1, "px"),
+        new CSSUnitValue(offset2, "px"),
+      ],
+    }),
+  });
+});

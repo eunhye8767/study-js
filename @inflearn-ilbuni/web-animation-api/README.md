@@ -59,3 +59,57 @@
         })
       });
   ```
+
+  4. `progress`
+    - `target` : 스크롤의 영향을 받는 영역
+      - progress 경우, 페이지 document.body 의 영향을 받기 때문에<br />target을 document.body로 적용한다.
+      - 특정 영역을 기준으로 하고자 할 때, `target: scrollBox,`
+    - `threshold` : 1로 할 경우, 상단(0) 기준으로 시작<br />0.5로 할 경우, 반 이상 지나갔을 때 시작.
+    ```javascript
+    // main.js
+    import "./scroll-timeline.js";
+
+    const progress = document.querySelector(".progress");
+    const scrollBox = document.querySelector(".scroll-box");
+
+    progress.animate(
+      [
+        {
+          transform: "scaleX(0)",
+        },
+        {
+          transform: "scaleX(1)",
+        },
+      ],
+      {
+        timeline: new ScrollTimeline({
+          scrollOffsets: [
+            {
+              target: document.body,
+              
+              // target을 scroll-box로 하게 되면 브라우저 내 시작점에 왔을 때
+              // target: scrollBox,
+
+              // 시작
+              edge: "start",
+
+              // 1 = 0 지점으로 왔을 때 시작
+              // 0.5 = 반 이상 지나갔을 때 시작
+              threshold: 1,
+            },
+            {
+              target: document.body,
+
+              // target을 scroll-box로 하게 되면 브라우저 내 마지막점에 왔을 때
+              // target: scrollBox,
+
+              // 마지막
+              edge: "end",
+              threshold: 1,
+            },
+          ],
+        }),
+      }
+    );
+
+    ```
