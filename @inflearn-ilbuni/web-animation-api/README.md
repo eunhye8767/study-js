@@ -38,3 +38,24 @@
     - Path를 따라 움직이는 작업을 하고자 할 때,<br />`svg path d`에 적용된 값을 `css, offset-path: path("문자열")`로 적용을 해준다.
     - `offset-rotate: auto ??deg`로 회전시켜 원하고자 하는 방향으로 적용한다.<br /> `auto`를 적용해줘야 곡선으로 움직일 때 자연스럽게 된다.
     - `offset-distance` 값에 따라 움직인다.
+
+3. `scroll-timeline.js`
+- https://github.com/flackr/scroll-timeline
+- 현재 2023.04 기준, 스크롤 애니메이션은 외부 라이브러리를 이용해야 한다.
+- 다른 라이브러리와 다른 점은 웹표준 기반의 라이브러리로 추후 브라우저별로 적용 시 해당 라이브러리를 뺀 상태로 적용하면 된다.
+  ```javascript
+  // https://github.com/flackr/scroll-timeline#usage
+  import 'https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js';
+
+  document.getElementById('parallax').animate(
+      { transform: ['translateY(0)', 'translateY(100px)']},
+      { duration: 10000, // Totally arbitrary!
+        fill: 'both',
+        timeline: new ScrollTimeline({
+            scrollOffsets: [
+                new CSSUnitValue(0, 'px'),
+                new CSSUnitValue(200, 'px')
+            ]
+        })
+      });
+  ```
