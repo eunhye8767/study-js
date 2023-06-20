@@ -113,3 +113,7 @@
     );
 
     ```
+
+5. css 속성, `contain: paint`
+- https://developer.mozilla.org/ko/docs/Web/CSS/contain
+- `overflow-x: hidden;`와 비슷한 효과지만 `position: sticky` 작동이 가능하다.
