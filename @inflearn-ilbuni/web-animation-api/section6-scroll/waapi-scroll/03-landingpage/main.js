@@ -1,4 +1,4 @@
-import './scroll-timeline.js';
+ import './scroll-timeline.js';
 import './airplane.js';
 import './hello.js';
 import './gallery.js';

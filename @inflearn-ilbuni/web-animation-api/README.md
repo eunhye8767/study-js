@@ -117,3 +117,36 @@
 5. css 속성, `contain: paint`
 - https://developer.mozilla.org/ko/docs/Web/CSS/contain
 - `overflow-x: hidden;`와 비슷한 효과지만 `position: sticky` 작동이 가능하다.
+  ```css
+  .wrap {
+    /* 가로스크롤 방지 */
+    /* overflow: hidden을 하면 sticky가 제대로 동작 안하는 버그가 있음 */
+    /* 따라서 contain: paint를 사용 */
+    contain: paint;
+  }
+  ```
+
+6. 스크롤 이벤트 시 Tip!
+```javascript
+// 스크롤
+let prevScrollY = -1; // 처음 스크롤 할 때 오락가락 방지
+let scrollFlag;
+window.addEventListener('scroll', e => {
+	if (scrollFlag) return;
+
+	scrollFlag = true;
+
+	setTimeout(() => {
+		scrollFlag = false;
+
+		if (window.scrollY >= prevScrollY) {
+			console.log('down');
+			airplane.dataset.direction = 'down';
+		} else {
+			console.log('up');
+			airplane.dataset.direction = 'up';
+		}
+		prevScrollY = window.scrollY;
+	}, 100);
+});
+```
