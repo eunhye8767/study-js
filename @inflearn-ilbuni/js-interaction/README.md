@@ -105,3 +105,34 @@
    -   └ 로켓 이미지 움직이게 : /13_3d_leaflet/learning/request-ani-rocket.html
    
    - 3D 리플릿 만들기 : /13_3d_leaflet/3d_leaflet.html1. SASS(CSS Preprocessor)
+
+14. [2023 보강]
+  - `04_js_start/2023.defer.html`
+    - html 불러오고 defer를 써주면 바로 이어 실행이 된다.
+    - `DOMContentLoaded` 직전에 실행이 된다.
+    ```javascript
+    // ex.js
+    document.querySelector(".characters").innerText = "안녕하세요"
+    ```
+    ```html
+    <head>
+      <script defer src="ex.js"></script>
+    </head>
+    ```
+
+  - `04_js_start/2023_async.html`
+    - defer와 비슷하게 실행을 해준다.
+    - defer 경우, 시점이 정확하지만 (html 파싱이 끝나고 DOMContentLoaded 전에 시작)
+    - async는 다운로드가 끝나면 바로 실행이 된다. <br />html 로드 여부와 상관없이 실행이 된다<br />독립적인 콘텐츠 같은 플러그인을 할 때 `async`를 활용.
+
+  #### `defer`와 `async`는 외부 스크립트로 불러와야 사용이 가능하다.
+
+  <br />
+  <br />
+
+  - `14_2023보강/closest.html`
+    - `closest()`는 본인 또는 본인과 가장 가까운 것을 선택할 때 사용.
+
+  - `07_object/2023-class.html` : class 형태
+
+  - `window.pageYOffset` => `window.scrollY`
