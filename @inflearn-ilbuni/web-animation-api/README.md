@@ -150,3 +150,5 @@ window.addEventListener('scroll', e => {
 	}, 100);
 });
 ```
+- 스크롤에 따라 값을 down? up? 체크를 할 경우<br />`setTimeout()`을 이용해 위와같이 적용하는 것을 추천!
+- 0.1초마다 값을 재랜더링 하기 때문에 속도 면에서 좋다!
